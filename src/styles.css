@@ -1,0 +1,29 @@
+:root {
+  --primary-color: #ff8c42;
+  --secondary-color: #ffd166;
+  --accent-color: #06d6a0;
+  --background-color: #fefae0;
+  --text-color: #073b4c;
+  --button-text-color: #ffffff;
+  --hover-success-color: #118ab2;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  background-color: var(--primary-color) !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--button-text-color) !important;
+  font-weight: 600;
+}
+
+.navbar .nav-link:hover {
+  color: var(--secondary-color) !important;
+}

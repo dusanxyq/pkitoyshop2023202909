@@ -1,0 +1,25 @@
+.text-primary {
+  text-decoration: none;
+}
+
+.text-primary:hover {
+  text-decoration: underline;
+}
+
+.star-rating {
+  display: inline-flex;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.star:hover,
+.star.active {
+  color: #ffc107;
+}

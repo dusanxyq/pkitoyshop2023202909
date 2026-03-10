@@ -1,0 +1,83 @@
+<div class="card mb-3 mx-auto toy-details-card">
+  <div class="row g-0 h-100">
+    <div class="col-md-6">
+      <img
+        [src]="utils.getImage(toy()!.imageUrl)"
+        class="img-fluid rounded-start h-100"
+        alt="toy"
+      />
+    </div>
+
+    <div class="col-md-6 d-flex flex-column">
+      <div class="card-body">
+        <h2 class="card-title fw-bold mb-3">{{ toy()!.name }}</h2>
+
+        <div class="table-container">
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <th scope="row">Opis</th>
+                  <td>{{ toy()?.description }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Kategorija</th>
+                  <td>{{ toy()?.type?.name }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Opis kategorije</th>
+                  <td>{{ toy()?.type?.description }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pol</th>
+                  <td>
+                    @if (toy()!.targetGroup === 'svi') {
+                      Unisex
+                    } @else if (toy()!.targetGroup === 'dečak') {
+                      Dečaci
+                    } @else {
+                      Devojčice
+                    }
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Uzrast</th>
+                  <td>{{ toy()?.ageGroup?.name }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Datum proizvodnje</th>
+                  <td>{{ toy()!.productionDate }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      @if (getAverageRating() > 0) {
+        <h5 class="mx-3">Ocena</h5>
+        <div class="star-rating rating-container">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <span [class.text-warning]="star <= roundRating(getAverageRating())" class="star mx-3"
+              >★</span
+            >
+          }
+        </div>
+      } @else {
+        <div class="rating-container">
+          <h5>Ocena</h5>
+          <p class="fs-5">
+            {{ getAverageRatingText() }}
+          </p>
+        </div>
+      }
+      <div class="toy-footer">
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="fs-4 fw-semibold mb-0 text-success">{{ toy()?.price }} RSD</p>
+          <button type="button" class="btn btn-success btn-lg" (click)="addToBasket(toy()!)">
+            Dodaj u korpu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

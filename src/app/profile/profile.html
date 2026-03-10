@@ -1,0 +1,207 @@
+<div class="wrapper">
+  <div class="card user-card mb-4">
+    <div class="card-header bg-transparent">
+      <div class="d-flex align-items-center">
+        <div>
+          <h5 class="card-title mb-1"></h5>
+          <div class="card-subtitle">
+            <p class="mb-1">
+              {{ this.currentUser()?.firstName }} {{ this.currentUser()?.lastName }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body user-card-content">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+            >
+              Izmena profila
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Ime</label>
+                  <input type="text" class="form-control" id="name" formControlName="firstName" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Prezime</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    formControlName="lastName"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Mobilni telefon</label>
+                  <input type="text" class="form-control" id="phone" formControlName="phone" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="toy" class="form-label">Omiljena kategorija igracke</label>
+                  <select class="form-select" id="toy" formControlName="favoriteToy">
+                    <option value="">{{ this.currentUser()?.favoriteToyType }}</option>
+                    @for (toy of uniqueTypes(); track $index) {
+                      <option [value]="toy">{{ toy }}</option>
+                    }
+                  </select>
+                </div>
+                <div class="mt-2">
+                  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">
+                    Sacuvaj izmene
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="false"
+              aria-controls="flush-collapseTwo"
+            >
+              Izmena lozinke
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
+                <div class="mb-3">
+                  <label for="old" class="form-label">Trenutna lozinka</label>
+                  <input type="password" class="form-control" id="old" formControlName="old" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="new" class="form-label">Nova lozinka</label>
+                  <input type="password" class="form-control" id="new" formControlName="new" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="repeat" class="form-label">Ponovite novu lozinku</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="repeat"
+                    formControlName="repeat"
+                  />
+                </div>
+
+                <div class="mt-2">
+                  <button type="submit" class="btn btn-primary" [disabled]="!passwordForm.valid">
+                    Sacuvaj izmene
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card no-order mb-4">
+          @if (reservations().length === 0) {
+            <div class="card-body text-center py-5">
+              <h1 class="card-title">Nemate narudzbine!</h1>
+              <p class="card-text">
+                Da napravite narudzbinu posetite
+                <a routerLink="/toys" class="text-primary">stranicu sa igrackama</a>
+              </p>
+            </div>
+          } @else {
+            <div class="card-body text-center">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Broj rezervacije</th>
+                    <th>Igracke</th>
+                    <th>Status</th>
+                    <th>Datum rezervacije</th>
+                    <th>Ukupna cena</th>
+                    <th>Opcije</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (r of reservations(); track $index) {
+                    <tr>
+                      <td>{{ r.id }}</td>
+                      <td>
+                        <ul>
+                          @for (item of r.toys; track $index) {
+                            <li>{{ item.name }} (x{{ item.quantity }})</li>
+                          }
+                        </ul>
+                      </td>
+                      <td>{{ r.status }}</td>
+                      <td>{{ readableDate(r.createdAt) }}</td>
+                      <td>{{ r.totalPrice }} RSD</td>
+                      <td>
+                        @if (r.status === 'rezervisano') {
+                          <button class="btn btn-sm btn-primary" (click)="arrived(r.id)">
+                            Stiglo
+                          </button>
+                          <button class="btn btn-sm btn-danger" (click)="cancel(r.id)">
+                            Otkazi
+                          </button>
+                        } @else if (r.status === 'pristiglo') {
+                          <td>
+                            <ul>
+                              @for (item of r.toys; track $index) {
+                                <li>
+                                  {{ item.name }}
+                                  @if (r.status === 'pristiglo') {
+                                    <div class="d-inline-block ms-2">
+                                      @for (star of [1, 2, 3, 4, 5]; track $index) {
+                                        <span
+                                          class="star"
+                                          [class.active]="isStarActive(r.id, item.toyId, star)"
+                                          (click)="rateToy(r.id, item.toyId, star)"
+                                          (mouseenter)="hoverReservation(r.id, item.toyId, star)"
+                                          (mouseleave)="leaveHover(r.id, item.toyId)"
+                                        >
+                                          ★
+                                        </span>
+                                      }
+                                    </div>
+                                  }
+                                </li>
+                              }
+                            </ul>
+                          </td>
+                        } @else {
+                          N/A
+                        }
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

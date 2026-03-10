@@ -1,0 +1,137 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 col-md-2 sidebar-filters">
+      <div class="filter-section">
+        <h5 class="filter-title">Filteri</h5>
+        <div class="filter-group">
+          <label class="filter-label">Pretraga</label>
+          <input
+            type="text"
+            class="form-control form-control-sm mb-2"
+            [(ngModel)]="search"
+            (keyup)="searchToys()"
+            placeholder="Pretrazi igracke"
+          />
+          <label class="filter-label">Kategorija</label>
+          <select
+            class="form-select form-select-sm"
+            [value]="filters().category"
+            (change)="updateFilter('category', $any($event.target).value)"
+          >
+            <option value="">Sve kategorije</option>
+            @for (category of categories(); track $index) {
+              <option [value]="category.typeId">{{ category.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Cena (RSD)</label>
+          <div class="price-inputs">
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              placeholder="Od"
+              [value]="filters().minPrice"
+              (input)="updateFilter('minPrice', +$any($event.target).value)"
+            />
+            <span class="mx-1">-</span>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              placeholder="Do"
+              [value]="filters().maxPrice"
+              (input)="updateFilter('maxPrice', +$any($event.target).value)"
+            />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Uzrast</label>
+          <select
+            class="form-select form-select-sm"
+            [value]="filters().ageGroup"
+            (change)="updateFilter('ageGroup', $any($event.target).value)"
+          >
+            <option value="">Svi uzrasti</option>
+            @for (age of ageGroups(); track $index) {
+              <option [value]="age">{{ age }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Pol</label>
+          <select
+            class="form-select form-select-sm"
+            [value]="filters().targetGroup"
+            (change)="updateFilter('targetGroup', $any($event.target).value)"
+          >
+            <option value="">Svi</option>
+            @for (target of targetGroups(); track $index) {
+              <option [value]="target">
+                {{ target.charAt(0).toUpperCase() }}{{ target.slice(1, target.length) }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <button class="btn btn-sm btn-outline-secondary w-100 mt-3" (click)="resetFilters()">
+          Resetuj filtere
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-10 col-md-10">
+      <div class="toys-header mb-3">
+        <h4>
+          Igračke <span class="badge bg-secondary">{{ toys().length }}</span>
+        </h4>
+      </div>
+
+      <div class="toys">
+        @for (toy of toys(); track $index) {
+          <div class="card my-card">
+            <img [src]="utils.getImage(toy.imageUrl)" class="card-img-top" [alt]="toy.permalink" />
+            <div class="card-body">
+              <h5 class="card-title">{{ toy.name }}</h5>
+              <div class="rating-display mb-2">
+                @if (getToyRatingCount(toy.toyId) > 0) {
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="stars-container">
+                      @for (star of [1, 2, 3, 4, 5]; track $index) {
+                        <span
+                          class="star-small"
+                          [class.active]="star <= getFullStars(getToyAverageRating(toy.toyId))"
+                          >★</span
+                        >
+                      }
+                    </div>
+                    <span class="rating-info">
+                      <strong class="text-warning">{{ getToyAverageRating(toy.toyId) }} </strong>
+                      <span class="text-muted small">({{ getToyRatingCount(toy.toyId) }})</span>
+                    </span>
+                  </div>
+                } @else {
+                  <span class="text-muted small">Bez ocena</span>
+                }
+              </div>
+              <p class="card-text">
+                <strong>{{ toy.price }} RSD</strong>
+              </p>
+              <div class="btn-group card-buttons">
+                <button type="button" class="btn btn-success" (click)="addToBasket(toy)">
+                  Dodaj u korpu
+                </button>
+                <a class="btn btn-primary" [routerLink]="['/details', toy?.toyId]">Vise</a>
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <div class="alert alert-info">Nema igračaka koje odgovaraju filterima.</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+

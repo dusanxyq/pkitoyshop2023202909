@@ -1,0 +1,271 @@
+.container-fluid {
+  padding: 20px;
+}
+
+.sidebar-filters {
+  background-color: #f8f9fa;
+  padding: 20px 15px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.filter-section {
+  position: sticky;
+  top: 20px;
+}
+
+.filter-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.price-inputs input {
+  flex: 1;
+}
+
+.toys-main {
+  min-width: 0;
+}
+
+.toys-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toys {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.my-card {
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.my-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  min-height: 50px;
+}
+
+.rating-display {
+  min-height: 30px;
+}
+
+.stars-container {
+  display: flex;
+  gap: 2px;
+}
+
+.star-small {
+  color: #ddd;
+  font-size: 1.2rem;
+}
+
+.star-small.active {
+  color: #ffc107;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.card-buttons .btn {
+  flex: 1;
+}
+
+.sidebar-basket {
+  padding: 0 15px;
+}
+
+.basket-section {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+.basket-header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.basket-title {
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.basket-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.basket-items {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.basket-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.basket-item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.basket-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.basket-item-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.basket-item-price {
+  font-size: 0.85rem;
+  color: #28a745;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-controls .quantity {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.quantity-controls .btn {
+  padding: 2px 8px;
+  font-size: 0.9rem;
+}
+
+.basket-footer {
+  border-top: 2px solid #dee2e6;
+  padding: 15px;
+  background-color: #f8f9fa;
+  margin-top: auto;
+}
+
+.basket-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.total-price {
+  color: #28a745;
+  font-size: 1.3rem;
+}
+
+.empty-basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+@media (max-width: 1199px) {
+  .toys {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 991px) {
+  .sidebar-filters,
+  .sidebar-basket {
+    margin-bottom: 20px;
+  }
+
+  .toys {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .toys {
+    grid-template-columns: 1fr;
+  }
+
+  .basket-section {
+    position: relative !important;
+    max-height: 500px;
+  }
+}

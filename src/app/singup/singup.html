@@ -1,0 +1,49 @@
+<div class="card login mx-auto" style="width: 800px">
+  <div class="card-header">
+    <h5>Registracija</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Ime</label>
+        <input type="text" class="form-control" id="name" formControlName="firstName" />
+      </div>
+      <div class="mb-3">
+        <label for="surname" class="form-label">Prezime</label>
+        <input type="text" class="form-control" id="surname" formControlName="lastName" />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email adresa</label>
+        <input type="email" class="form-control" id="email" formControlName="email" />
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Mobilni telefon</label>
+        <input type="tel" class="form-control" id="phone" formControlName="phone" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Lozinka</label>
+        <input type="password" class="form-control" id="password" formControlName="password" />
+      </div>
+      <div class="mb-3">
+        <label for="repeat" class="form-label">Ponovite lozinku</label>
+        <input type="password" class="form-control" id="repeat" formControlName="repeatPassword" />
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Izaberite omiljen tip igracke</label>
+        <select class="form-select" id="type" formControlName="favoriteToyType">
+          @for (type of uniqueTypes(); track $index) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+      </div>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary px-4">Napravi profil</button>
+        <p class="text-muted mt-3 mb-0">
+          Vec imate profil?
+          <a routerLink="/login" class="link-primary">Prijavite se.</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+

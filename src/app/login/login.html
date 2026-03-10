@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card login shadow-sm" style="width: 600px">
+    <div class="card-header text-center">
+      <h5>Prijava</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (submit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email adresa</label>
+          <input type="email" class="form-control" id="email" formControlName="email" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Lozinka</label>
+          <input type="password" class="form-control" id="password" formControlName="password" />
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-primary px-4">Prijavi se</button>
+          <p class="text-muted mt-3 mb-0">
+            Nemate profil?
+            <a routerLink="/singup" class="link-primary">Registrujte se.</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="col-lg-12 col-md-8 sidebar-basket">
+  <div class="basket-section sticky-top">
+    <div class="basket-header">
+      <h5 class="basket-title">
+        Korpa
+        @if (basketItemCount() > 0) {
+          <span class="badge bg-primary">{{ basketItemCount() }}</span>
+        }
+      </h5>
+    </div>
+
+    <div class="basket-content">
+      @if (basket().length > 0) {
+        <div class="basket-items">
+          @for (item of basket(); track $index) {
+            <div class="basket-item">
+              <img
+                [src]="utils.getImage(item.toy.imageUrl)"
+                [alt]="item.toy.name"
+                class="basket-item-img"
+              />
+              <div class="basket-item-details">
+                <h6 class="basket-item-name">{{ item.toy.name }}</h6>
+                <p class="basket-item-price">{{ item.toy.price }} RSD</p>
+                <div class="quantity-controls">
+                  <button
+                    class="btn btn-sm btn-outline-secondary"
+                    (click)="updateQuantity(item.toy.toyId, item.quantity - 1)"
+                  >
+                    -
+                  </button>
+                  <span class="quantity">{{ item.quantity }}</span>
+                  <button
+                    class="btn btn-sm btn-outline-secondary"
+                    (click)="updateQuantity(item.toy.toyId, item.quantity + 1)"
+                  >
+                    +
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger ms-2"
+                    (click)="removeItem(item.toy.toyId)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="basket-footer">
+          <div class="basket-total">
+            <strong>Ukupno:</strong>
+            <strong class="total-price">{{ total() }} RSD</strong>
+          </div>
+          <button class="btn btn-primary w-100 mb-2" (click)="pay()">Rezervisi</button>
+          <button class="btn btn-outline-danger w-100" (click)="clearBasket()">
+            Isprazni korpu
+          </button>
+        </div>
+      } @else {
+        <div class="empty-basket">
+          <i class="bi bi-cart-x" style="font-size: 3rem; color: #ccc"></i>
+          <p class="text-muted mt-2">Korpa je prazna</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+

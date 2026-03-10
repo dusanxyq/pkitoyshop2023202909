@@ -1,0 +1,88 @@
+body {
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.toy-details-card {
+  max-width: 1200px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.toy-details-card .row {
+  min-height: 600px;
+}
+
+.toy-details-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 400px;
+}
+
+.card-body {
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.table-container {
+  margin-bottom: 1rem;
+}
+
+.toy-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.toy-footer .btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  transition: all 0.2s ease-in-out;
+}
+
+.toy-footer .btn-success:hover {
+  background-color: #157347;
+  border-color: #146c43;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .toy-details-card img {
+    min-height: 300px;
+  }
+
+  .toy-footer .btn-success {
+    width: 100%;
+  }
+
+  .toy-details-card .row {
+    min-height: auto;
+  }
+}
+
+.card-title {
+  font-size: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+
+.rating-container {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  transition: color 0.2s ease;
+  cursor: default;
+}
