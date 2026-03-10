@@ -1,59 +1,54 @@
-# Pkitoyshop2023202909
+# PKI Toy Shop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+**PKI Toy Shop** je web aplikacija za prodaju i pregled igračaka. Napravljena je koristeći **Angular 20**, **Bootstrap 5**, i **TypeScript**, sa fokusom na interaktivno i sigurno korisničko iskustvo.
 
-## Development server
+## Funkcionalnosti
 
-To start a local development server, run:
+- Pregled i filtriranje igračaka
+- Sigurna kupovina i prikaz informacija o proizvodima
+- Brza i responsivna navigacija
+- Elegantne animacije i vizuelni efekti sa CSS i SweetAlert2
 
-```bash
-ng serve
-```
+## Tehnologije
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Angular 20** – front-end framework
+- **Bootstrap 5** – stilizacija i layout
+- **TypeScript** – tipizirani JavaScript
+- **RxJS** – reaktivno programiranje
+- **SweetAlert2** – elegantni alerti i obaveštenja
+- **Axios** – HTTP zahtevi
 
-## Code scaffolding
+## Instalacija i pokretanje
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Klonirajte repozitorijum:
 
-```bash
-ng generate component component-name
-```
+git clone <repo-url>
+2. Instalirajte zavisnosti:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+npm install
 
-```bash
-ng generate --help
-```
+3. Pokrenite razvojni server:
 
-## Building
+npm start
 
-To build the project run:
+4. Aplikacija će biti dostupna na [http://localhost:4200](http://localhost:4200)
 
-```bash
-ng build
-```
+## Skripte
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- `npm start` – pokreće razvojni server
+- `npm run build` – pravi build aplikacije
+- `npm run watch` – build u režimu watch
+- `npm test` – pokreće testove
 
-## Running unit tests
+## Code Style
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Koristi se **Prettier** za formatiranje koda:  
 
-```bash
-ng test
-```
+- Širina linije: 100
+- Single quotes: `true`
+- Bez tačke-zarez (`semi: false`)
+- HTML fajlovi koriste Angular parser
 
-## Running end-to-end tests
+## Autor
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Dusan** – Kreator i developer ovog projekta
